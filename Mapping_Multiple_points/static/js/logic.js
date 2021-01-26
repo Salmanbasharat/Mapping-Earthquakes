@@ -1,6 +1,6 @@
 
 // Add console.log to check to see if our code is working.
-console.log("working");
+// console.log("working");
 
 
 // We create the tile layer that will be the background of our map.
@@ -38,11 +38,46 @@ var map = L.map("mapid", {
 
 // Using circleMarker function - pixel method
 
-L.circleMarker([34.0522, -118.2437], {
-    color: 'black',
-    fillColor: '#ffffa1',
-    radius: 100
- }).addTo(map);
+// L.circleMarker([34.0522, -118.2437], {
+//     color: 'black',
+//     fillColor: '#ffffa1',
+//     radius: 100
+//  }).addTo(map);
+
+// For Multiple markers - An array containing each city's location, state, and population.
+// Get data from cities.js
+let cityData = cities;
+
+// Loop through the cities array and create one marker for each city.
+cityData.forEach(function(city) {
+  console.log(city)
+ });
+
+// Loop through the cities array and create one marker for each city.
+// cityData.forEach(function(city) {
+//   console.log(city)
+//   L.marker(city.location).addTo(map);
+// });
+
+//  Loop through the cities array and create one marker for each city - ADD POP UP ON MARKERS WITH 000 SEPARATER
+
+// cityData.forEach(function(city) {
+//   console.log(city)
+//   L.marker(city.location)
+//   .bindPopup("<h2>" + city.city + ", " + city.state + "</h2> <hr> <h3>Population " + city.population.toLocaleString() + "</h3>")
+// .addTo(map);
+// });
+
+    //change the marker for each city to a circle that has a radius equivalent to the city's population.
+    cityData.forEach(function(city) {
+      console.log(city)
+      L.circleMarker(city.location, {
+         radius: city.population/100000
+        })
+      .bindPopup("<h2>" + city.city + ", " + city.state + "</h2> <hr> <h3>Population " + city.population.toLocaleString() + "</h3>")
+    .addTo(map);
+    });
+
 
 // Then we add our 'graymap' tile layer to the map.
 graymap.addTo(map);
